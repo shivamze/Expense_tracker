@@ -1,0 +1,24 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Next.js
+node_modules/
+.next/
+out/
+
+# Nested Git history backups
+.git-backup/
+
+# Local configuration
+.DS_Store
+*.pem
