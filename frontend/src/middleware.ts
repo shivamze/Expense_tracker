@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
 
   const isProtectedPath =
     pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/expenses") ||
+    pathname.startsWith("/expense") ||
     pathname.startsWith("/savings");
 
   // Not logged in, trying to open a protected page -> go to login
@@ -31,7 +31,7 @@ export const config = {
     "/",
     "/register",
     "/dashboard/:path*",
-    "/expenses/:path*",
+    "/expense/:path*",
     "/savings/:path*",
   ],
 };

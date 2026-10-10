@@ -97,7 +97,7 @@ def read_expense(
     }
 
 def update_expense(session: Session, expense_id: int, expense_data: ExpenseUpdate, current_user: User):
-    db_expense = session.query(Expense).filter(Expense.id == expense_id).first()
+    db_expense = session.query(Expense).filter(Expense.id == expense_id, Expense.user_id == current_user.id).first()
 
     if not db_expense:
         raise HTTPException(status_code=404, detail="Expense Does not Exist")

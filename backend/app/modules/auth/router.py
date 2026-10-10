@@ -36,7 +36,11 @@ def delete(
 
 @router.get("/me")
 def get_me(user: User = Depends(get_current_user)):
-    return user
+    return {
+        "name": user.name,
+        "email": user.email,
+        "id": user.id
+    }
 
 from fastapi import Response, Cookie
 

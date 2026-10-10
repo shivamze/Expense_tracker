@@ -70,14 +70,14 @@ def get_expense_summary(
     return get_dashboard_summary(session, current_user, start_date, end_date)
 
 
-@router.post("/extract")
-async def extract_expense_from_receipt(file: UploadFile = File(...)):
-    if file.content_type not in ["image/jpeg", "image/png"]:
-        raise HTTPException(status_code=400, detail="Only JPEG and PNG images are supported.")
+# @router.post("/extract")
+# async def extract_expense_from_receipt(file: UploadFile = File(...)):
+#     if file.content_type not in ["image/jpeg", "image/png"]:
+#         raise HTTPException(status_code=400, detail="Only JPEG and PNG images are supported.")
 
-    try:
-        file_bytes = await file.read()
-        extracted_data = receipt_to_expense(file_bytes)
-        return extracted_data
-    except ValueError as e:
-        raise HTTPException(status_code=422, detail=str(e))
+#     try:
+#         file_bytes = await file.read()
+#         extracted_data = receipt_to_expense(file_bytes)
+#         return extracted_data
+#     except ValueError as e:
+#         raise HTTPException(status_code=422, detail=str(e))

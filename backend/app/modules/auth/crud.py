@@ -30,7 +30,11 @@ def register_user(session: Session, user_data: UserRegister):
     session.add(user_info)
     session.commit()
     session.refresh(user_info)
-    return user_info
+    return {
+            "name": user_info.name,
+            "email": user_info.email,
+            "id": user_info.id,
+        }
 
 
 def login_user(session: Session, user_data: UserLogin):
