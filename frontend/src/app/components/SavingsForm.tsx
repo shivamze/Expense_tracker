@@ -35,6 +35,7 @@ export default function SavingForm({
   const [amountStr, setAmountStr] = useState(
     initial ? String(initial.amount) : "",
   );
+  const [isPending, setIsPending] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const set = (field: string, value: string) => {
@@ -99,6 +100,7 @@ export default function SavingForm({
     if (!initial) {
       setForm(empty());
       setAmountStr("");
+      setIsPending(false)
     }
   };
 
