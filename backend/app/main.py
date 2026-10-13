@@ -16,6 +16,7 @@ app.add_middleware(
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://32.236.166.183:3000",
+        "https://expense-tracker-topaz-psi-34.vercel.app",
     ], # Update with your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
