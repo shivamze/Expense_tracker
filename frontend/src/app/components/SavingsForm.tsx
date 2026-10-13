@@ -42,7 +42,7 @@ export default function SavingForm({
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const { mutate, isPending } = useCreateSaving();
+  // const { mutate, isPending } = useCreateSaving();
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -74,6 +74,7 @@ export default function SavingForm({
     };
 
     onSubmit(data);
+    handleClose();
   };
 
   useEffect(() => {
