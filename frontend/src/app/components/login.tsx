@@ -13,10 +13,10 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [authError, setAuthError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const router = useRouter();
-  const {refreshUser} = useAuth()
+  const {refreshUser, user, loading} = useAuth()
   const validate = () => {
     const errs: Record<string, string> = {};
     if (!email.trim()) errs.email = "Email is required";
@@ -27,13 +27,19 @@ export default function Login() {
     return Object.keys(errs).length === 0;
   };
 
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/dashboard");
+    }
+  }, [user, loading, router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError("");
 
     if (!validate()) return;
 
-    setLoading(true);
+    setLoad(true);
 
     try {
       const formData = new URLSearchParams();
@@ -50,12 +56,13 @@ export default function Login() {
       Cookies.set("access_token", access_token, { expires: 15 });
     
       await refreshUser(); // now the token exists
-      router.push("/dashboard");
+      router.refresh(); // clears the client router cache
+      router.replace("/dashboard");
     } catch (err) {
       console.error("Login failed:", err);
       setAuthError("Invalid email or password.");
     } finally {
-      setLoading(false);
+      setLoad(false);
     }
   };
   return (
@@ -195,10 +202,10 @@ export default function Login() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={load}
               className="w-full py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700 disabled:opacity-60 transition-colors mt-1"
             >
-              {loading ? "Signing in…" : "Sign In"}
+              {load ? "Signing in…" : "Sign In"}
             </button>
           </form>
         </div>
